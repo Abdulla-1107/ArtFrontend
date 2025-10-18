@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cart": "Cart"
+  },
+  "hero": {
+    "title": "Discover Original Art",
+    "subtitle": "by Bibisora",
+    "description": "Explore a unique collection of paintings and digital artworks by Uzbek artist Bibisora. Each piece tells a story of culture, emotion, and beauty.",
+    "cta": "View Gallery"
+  },
+  "featured": {
+    "title": "Featured Artworks",
+    "viewAll": "View All Gallery"
+  },
+  "testimonials": {
+    "title": "What Art Lovers Say"
+  },
+  "newsletter": {
+    "title": "Subscribe to New Artworks",
+    "description": "Be the first to know about new creations, exhibitions, and exclusive offers.",
+    "placeholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "sending": "Sending...",
+    "successTitle": "Subscribed!",
+    "successMessage": "Thank you for subscribing to our newsletter."
+  },
+  "blog": {
+    "title": "Art Journal",
+    "subtitle": "Stories, inspirations, and insights from my creative journey"
+  },
+  "gallery": {
+    "title": "Art Gallery",
+    "search": "Search artworks...",
+    "priceRange": "Price Range",
+    "allPrices": "All Prices",
+    "under300": "Under $300",
+    "300to400": "$300 - $400",
+    "over400": "Over $400",
+    "sort": "Sort By",
+    "sortNewest": "Newest",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "sortName": "Name",
+    "filter": {
+      "all": "All",
+      "oil": "Oil Painting",
+      "watercolor": "Watercolor",
+      "digital": "Digital Art",
+      "mixed": "Mixed Media"
+    }
+  },
+  "artwork": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "price": "Price",
+    "category": "Category",
+    "dimensions": "Dimensions",
+    "inCart": "In Cart",
+    "viewDetails": "View Details",
+    "shareOn": "Share on"
+  },
+  "purchase": {
+    "title": "Complete Your Purchase",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "emailPlaceholder": "your.email@example.com",
+      "optional": "optional",
+      "agreeToTerms": "I agree to the terms and conditions of the",
+      "oferta": "Public Offer",
+      "confirm": "Confirm Purchase"
+    },
+    "errors": {
+      "nameRequired": "Name is required",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number",
+      "emailInvalid": "Please enter a valid email address",
+      "termsRequired": "You must agree to the terms"
+    },
+    "success": {
+      "title": "Thank You!",
+      "message": "Your purchase request has been received. We will contact you soon.",
+      "thankYou": "We appreciate your interest in art"
+    }
+  },
+  "oferta": {
+    "title": "Public Offer Agreement",
+    "section1": {
+      "title": "1. General Provisions",
+      "content": "This public offer (hereinafter referred to as the 'Offer') is an official offer by the Artist to enter into an agreement for the sale of artworks presented on this website. By submitting a purchase request, the Buyer accepts all terms of this Offer."
+    },
+    "section2": {
+      "title": "2. Subject of the Agreement",
+      "content": "The Artist undertakes to transfer ownership of the artwork to the Buyer, and the Buyer undertakes to accept and pay for the artwork under the terms specified in this Offer. The artwork includes:",
+      "item1": "Original paintings (oil, acrylic, watercolor, etc.)",
+      "item2": "Digital art prints and reproductions",
+      "item3": "Limited edition artworks",
+      "item4": "Custom commissioned pieces"
+    },
+    "section3": {
+      "title": "3. Order and Payment",
+      "content": "The Buyer places an order by filling out the purchase form on the website. After receiving the order, the Artist contacts the Buyer to confirm details, discuss delivery methods, and arrange payment. Payment is made by agreement between the parties (bank transfer, cash, or other methods)."
+    },
+    "section4": {
+      "title": "4. Delivery",
+      "content": "Delivery terms, methods, and costs are discussed individually with each Buyer. The Artist ensures safe packaging of the artwork. Risk of accidental loss or damage passes to the Buyer upon receipt of the artwork."
+    },
+    "section5": {
+      "title": "5. Returns and Exchanges",
+      "content": "Returns and exchanges are possible only in case of significant defects in the artwork that were not disclosed prior to purchase. The Buyer must notify the Artist within 3 days of receiving the artwork. Custom commissioned pieces are non-refundable."
+    },
+    "section6": {
+      "title": "6. Copyright and Intellectual Property",
+      "content": "The Artist retains copyright to all artworks. The Buyer acquires only ownership of the physical object. Reproduction, copying, or commercial use of the artwork's image without the Artist's written consent is prohibited."
+    },
+    "lastUpdated": "Last updated: January 2025"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove",
+    "item": "item",
+    "items": "items",
+    "purchaseSuccess": "Purchase Completed!",
+    "purchaseSuccessMessage": "Your order has been successfully submitted. We will contact you soon!"
+  },
+  "about": {
+    "title": "About Bibisora",
+    "subtitle": "Uzbek Artist & Creative Soul",
+    "bio": "Bibisora is a talented Uzbek artist whose work bridges traditional Central Asian aesthetics with contemporary artistic expression. Her paintings explore themes of identity, cultural heritage, and the beauty of everyday life. Each artwork is created with passion and meticulous attention to detail, making every piece a unique treasure."
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Have questions? I'd love to hear from you.",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  },
+  "footer": {
+    "description": "Original artworks by Uzbek artist Bibisora. Each piece tells a unique story.",
+    "quickLinks": "Quick Links",
+    "rights": "All rights reserved.",
+    "followMe": "Follow Me"
+  }
+}

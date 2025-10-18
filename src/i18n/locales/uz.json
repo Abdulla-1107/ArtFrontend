@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "gallery": "Galereya",
+    "about": "Haqida",
+    "blog": "Blog",
+    "contact": "Aloqa",
+    "cart": "Savatcha"
+  },
+  "hero": {
+    "title": "Asl san'atni kashf eting",
+    "subtitle": "Bibisora tomonidan",
+    "description": "O'zbek rassomi Bibisoraning noyob rasm va raqamli asarlar to'plamini o'rganing. Har bir asar madaniyat, his-tuyg'ular va go'zallik haqida hikoya qiladi.",
+    "cta": "Galereyani ko'rish"
+  },
+  "featured": {
+    "title": "Tanlangan asarlar",
+    "viewAll": "Barcha galereyani ko'rish"
+  },
+  "testimonials": {
+    "title": "San'at ixlosmandlarining fikrlari"
+  },
+  "newsletter": {
+    "title": "Yangi asarlarga obuna bo'ling",
+    "description": "Yangi ijodlar, ko'rgazmalar va maxsus takliflar haqida birinchilardan bo'lib bilib oling.",
+    "placeholder": "Emailingizni kiriting",
+    "subscribe": "Obuna bo'lish",
+    "sending": "Yuborilmoqda...",
+    "successTitle": "Obuna bo'ldingiz!",
+    "successMessage": "Axborot byulletenimizga obuna bo'lganingiz uchun rahmat."
+  },
+  "blog": {
+    "title": "San'at jurnali",
+    "subtitle": "Mening ijodiy sayohatimdan hikoyalar, ilhom va fikrlar"
+  },
+  "gallery": {
+    "title": "San'at galereyasi",
+    "search": "Asarlarni qidirish...",
+    "priceRange": "Narx oralig'i",
+    "allPrices": "Barcha narxlar",
+    "under300": "$300 gacha",
+    "300to400": "$300 - $400",
+    "over400": "$400 dan yuqori",
+    "sort": "Saralash",
+    "sortNewest": "Eng yangi",
+    "sortPriceLow": "Narx: kamdan ko'pga",
+    "sortPriceHigh": "Narx: ko'pdan kamga",
+    "sortName": "Nomi bo'yicha",
+    "filter": {
+      "all": "Hammasi",
+      "oil": "Moyli bo'yoq",
+      "watercolor": "Akvarelʹ",
+      "digital": "Raqamli san'at",
+      "mixed": "Aralash texnika"
+    }
+  },
+  "artwork": {
+    "addToCart": "Savatchaga qo'shish",
+    "buyNow": "Sotib olish",
+    "price": "Narx",
+    "category": "Kategoriya",
+    "dimensions": "O'lchamlar",
+    "inCart": "Savatchada",
+    "viewDetails": "Batafsil",
+    "shareOn": "Ulashish"
+  },
+  "purchase": {
+    "title": "Xaridni rasmiylashtirish",
+    "form": {
+      "name": "To'liq ismingiz",
+      "namePlaceholder": "To'liq ismingizni kiriting",
+      "phone": "Telefon raqami",
+      "email": "Elektron pochta",
+      "emailPlaceholder": "sizning.email@example.com",
+      "optional": "ixtiyoriy",
+      "agreeToTerms": "Men shartlariga roziman",
+      "oferta": "Ommaviy oferta",
+      "confirm": "Xaridni tasdiqlash"
+    },
+    "errors": {
+      "nameRequired": "Ism kiritish shart",
+      "phoneRequired": "Telefon raqami kiritish shart",
+      "phoneInvalid": "To'g'ri telefon raqamini kiriting",
+      "emailInvalid": "To'g'ri email manzilini kiriting",
+      "termsRequired": "Shartlar bilan rozilik zarur"
+    },
+    "success": {
+      "title": "Rahmat!",
+      "message": "Sizning xarid so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.",
+      "thankYou": "San'atga qiziqish bildirganingiz uchun rahmat"
+    }
+  },
+  "oferta": {
+    "title": "Ommaviy oferta shartnomasi",
+    "section1": {
+      "title": "1. Umumiy qoidalar",
+      "content": "Ushbu ommaviy oferta (keyingi o'rinlarda - 'Oferta') Rassomning ushbu veb-saytda taqdim etilgan san'at asarlarini sotish shartnomasini tuzish bo'yicha rasmiy taklifdir. Buyurtma berib, Xaridor ushbu Ofertaning barcha shartlarini qabul qiladi."
+    },
+    "section2": {
+      "title": "2. Shartnoma predmeti",
+      "content": "Rassom san'at asarini Xaridorga mulk sifatida topshirishni o'z zimmasiga oladi, Xaridor esa asarni qabul qilish va to'lashni ushbu Ofertada ko'rsatilgan shartlar asosida o'z zimmasiga oladi. San'at asari quyidagilarni o'z ichiga oladi:",
+      "item1": "Asl rasmlar (yog', akril, akvarellar va boshqalar)",
+      "item2": "Raqamli san'at nusxalari va prinltar",
+      "item3": "Cheklangan nashrlar",
+      "item4": "Buyurtma asosida bajarilgan ishlar"
+    },
+    "section3": {
+      "title": "3. Buyurtma va to'lov",
+      "content": "Xaridor veb-saytdagi xarid formasini to'ldirib buyurtma beradi. Buyurtmani olgandan so'ng, Rassom tafsilotlarni aniqlash, yetkazib berish usulini va to'lov shartlarini muhokama qilish uchun Xaridor bilan bog'lanadi. To'lov tomonlar kelishuviga ko'ra amalga oshiriladi (bank o'tkazmasi, naqd pul yoki boshqa usullar)."
+    },
+    "section4": {
+      "title": "4. Yetkazib berish",
+      "content": "Yetkazib berish shartlari, usullari va narxi har bir Xaridor bilan alohida muhokama qilinadi. Rassom san'at asarining xavfsiz qadoqlanishini ta'minlaydi. Tasodifiy yo'qotish yoki shikastlanish xavfi asarni qabul qilgan paytdan boshlab Xaridorga o'tadi."
+    },
+    "section5": {
+      "title": "5. Qaytarish va almashtirish",
+      "content": "Qaytarish va almashtirish faqat xariddan oldin ko'rsatilmagan jiddiy nuqsonlar bo'lgan taqdirda mumkin. Xaridor asarni olgandan keyin 3 kun ichida Rassomga xabar berishi kerak. Buyurtma asosida bajarilgan ishlar qaytarilmaydi."
+    },
+    "section6": {
+      "title": "6. Mualliflik huquqi va intellektual mulk",
+      "content": "Rassom barcha san'at asarlariga mualliflik huquqini saqlab qoladi. Xaridor faqat moddiy ob'ektga egalik huquqini oladi. Rassomning yozma roziligisiz asar tasvirini ko'paytirish, nusxalash yoki tijoriy maqsadlarda foydalanish taqiqlanadi."
+    },
+    "lastUpdated": "Oxirgi yangilanish: Yanvar 2025"
+  },
+  "cart": {
+    "title": "Xarid savatchasi",
+    "empty": "Savatchangiz bo'sh",
+    "continueShopping": "Xaridni davom ettirish",
+    "subtotal": "Jami",
+    "checkout": "To'lovga o'tish",
+    "remove": "O'chirish",
+    "item": "mahsulot",
+    "items": "mahsulot",
+    "purchaseSuccess": "Xarid tugallandi!",
+    "purchaseSuccessMessage": "Buyurtmangiz muvaffaqiyatli rasmiylashtirildi. Tez orada siz bilan bog'lanamiz!"
+  },
+  "about": {
+    "title": "Bibisora haqida",
+    "subtitle": "O'zbek rassomi va ijodiy ruh",
+    "bio": "Bibisora iqtidorli o'zbek rassomi bo'lib, uning ishlari an'anaviy Markaziy Osiyo estetikasini zamonaviy badiiy ifoda bilan birlashtiradi. Uning rasmlari o'zlik, madaniy meros va kundalik hayot go'zalligi mavzularini o'rganadi. Har bir asar ishtiyoq va batafsil e'tibor bilan yaratilgan, har bir asarni noyob xazinaga aylantiradi."
+  },
+  "contact": {
+    "title": "Bog'laning",
+    "subtitle": "Savollaringiz bormi? Sizdan eshitishdan xursand bo'laman.",
+    "name": "Ismingiz",
+    "email": "Emailingiz",
+    "message": "Xabaringiz",
+    "send": "Xabar yuborish",
+    "success": "Xabar muvaffaqiyatli yuborildi!",
+    "error": "Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring."
+  },
+  "footer": {
+    "description": "O'zbek rassomi Bibisoraning asl asarlari. Har bir asar o'ziga xos hikoyani aytib beradi.",
+    "quickLinks": "Tezkor havolalar",
+    "rights": "Barcha huquqlar himoyalangan.",
+    "followMe": "Kuzatib boring"
+  }
+}
