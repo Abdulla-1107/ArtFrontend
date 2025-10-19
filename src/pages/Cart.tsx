@@ -53,7 +53,7 @@ const Cart = () => {
             </div>
             <h2 className="text-2xl font-heading font-bold mb-4">{t('cart.empty')}</h2>
             <p className="text-muted-foreground mb-8">
-              Browse our gallery and find the perfect artwork for your collection.
+              {t('cart.browseGallery')}
             </p>
             <Link to="/gallery">
               <Button size="lg">{t('cart.continueShopping')}</Button>
@@ -129,11 +129,11 @@ const Cart = () => {
             >
               <Card className="sticky top-24 card-elegant border-border/50">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-heading font-bold mb-6">Order Summary</h2>
+                  <h2 className="text-xl font-heading font-bold mb-6">{t('cart.orderSummary')}</h2>
 
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Items ({cart.length})</span>
+                      <span className="text-muted-foreground">{t('cart.itemsCount')} ({cart.length})</span>
                       <span className="font-semibold">${getCartTotal()}</span>
                     </div>
 

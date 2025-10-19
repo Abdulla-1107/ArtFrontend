@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Heart, Eye } from "lucide-react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Artwork } from "@/contexts/CartContext";
-import { useFavorites } from "@/contexts/FavoritesContext";
-import { useState } from "react";
-import { ImageLightbox } from "./ImageLightbox";
-import { cn } from "@/lib/utils";
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Heart, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Artwork } from '@/contexts/CartContext';
+import { useFavorites } from '@/contexts/FavoritesContext';
+import { useState } from 'react';
+import { ImageLightbox } from './ImageLightbox';
+import { cn } from '@/lib/utils';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -22,9 +22,9 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
 
   const getTitle = () => {
     switch (i18n.language) {
-      case "ru":
+      case 'ru':
         return artwork.titleRu;
-      case "uz":
+      case 'uz':
         return artwork.titleUz;
       default:
         return artwork.title;
@@ -43,7 +43,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
       >
         <Card className="group overflow-hidden hover-lift card-elegant border-0 shadow-soft">
           <div className="relative">
-            <div
+            <div 
               className="relative aspect-[3/4] overflow-hidden bg-muted/30 cursor-pointer"
               onClick={() => setLightboxOpen(true)}
             >
@@ -71,40 +71,36 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
             </Button>
           </div>
 
-          <CardContent className="p-6">
+        <CardContent className="p-6">
+          <Link to={`/artwork/${artwork.id}`}>
+            <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+              {getTitle()}
+            </h3>
+          </Link>
+          <p className="text-sm text-muted-foreground mb-4">{artwork.dimensions}</p>
+          
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-2xl font-bold text-primary">${artwork.price}</span>
             <Link to={`/artwork/${artwork.id}`}>
-              <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                {getTitle()}
-              </h3>
+              <Button
+                size="sm"
+                className="gap-2 rounded-full transition-all duration-300"
+              >
+                <Eye className="h-4 w-4" />
+                {t('artwork.viewDetails')}
+              </Button>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              {artwork.dimensions}
-            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
 
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-2xl font-bold text-primary">
-                ${artwork.price}
-              </span>
-              <Link to={`/artwork/${artwork.id}`}>
-                <Button
-                  size="sm"
-                  className="gap-2 rounded-full transition-all duration-300"
-                >
-                  <Eye className="h-4 w-4" />
-                  {t("artwork.viewDetails")}
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      <ImageLightbox
-        isOpen={lightboxOpen}
-        onClose={() => setLightboxOpen(false)}
-        image={artwork.image}
-        title={getTitle()}
-      />
-    </>
+    <ImageLightbox
+      isOpen={lightboxOpen}
+      onClose={() => setLightboxOpen(false)}
+      image={artwork.image}
+      title={getTitle()}
+    />
+  </>
   );
 };

@@ -28,9 +28,9 @@ const ArtworkDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-heading font-bold mb-4">Artwork not found</h1>
+          <h1 className="text-2xl font-heading font-bold mb-4">{t('artwork.artworkNotFound')}</h1>
           <Link to="/gallery">
-            <Button variant="outline">Back to Gallery</Button>
+            <Button variant="outline">{t('artwork.backToGallery')}</Button>
           </Link>
         </div>
       </div>
@@ -76,8 +76,8 @@ const ArtworkDetail = () => {
       case 'copy':
         navigator.clipboard.writeText(url);
         toast({
-          title: "Link copied!",
-          description: "The artwork link has been copied to clipboard",
+          title: t('artwork.linkCopied'),
+          description: t('artwork.linkCopiedDesc'),
         });
         break;
     }
@@ -89,7 +89,7 @@ const ArtworkDetail = () => {
         <Link to="/gallery">
           <Button variant="ghost" className="mb-8 gap-2">
             <ArrowLeft className="h-4 w-4" />
-            Back to Gallery
+            {t('artwork.backToGallery')}
           </Button>
         </Link>
 
@@ -108,7 +108,7 @@ const ArtworkDetail = () => {
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
                 <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-lg font-medium">
-                  Click to view full size
+                  {t('artwork.clickToViewFull')}
                 </span>
               </div>
             </Card>
@@ -147,15 +147,15 @@ const ArtworkDetail = () => {
             <div className="flex gap-2 mb-6">
               <Button variant="outline" size="sm" onClick={() => handleShare('facebook')} className="gap-2">
                 <Facebook className="h-4 w-4" />
-                Share
+                {t('artwork.share')}
               </Button>
               <Button variant="outline" size="sm" onClick={() => handleShare('twitter')} className="gap-2">
                 <Twitter className="h-4 w-4" />
-                Tweet
+                {t('artwork.tweet')}
               </Button>
               <Button variant="outline" size="sm" onClick={() => handleShare('copy')} className="gap-2">
                 <Share2 className="h-4 w-4" />
-                Copy Link
+                {t('artwork.copyLink')}
               </Button>
             </div>
 

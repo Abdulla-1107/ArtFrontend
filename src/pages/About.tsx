@@ -53,13 +53,13 @@ const About = () => {
                 <Card className="p-6 bg-gradient-subtle border-none">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                    <div className="text-sm text-muted-foreground">Artworks Created</div>
+                    <div className="text-sm text-muted-foreground">{t('about.artworksCreated')}</div>
                   </div>
                 </Card>
                 <Card className="p-6 bg-gradient-subtle border-none">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary mb-2">15+</div>
-                    <div className="text-sm text-muted-foreground">Years Experience</div>
+                    <div className="text-sm text-muted-foreground">{t('about.yearsExperience')}</div>
                   </div>
                 </Card>
               </div>
@@ -73,17 +73,12 @@ const About = () => {
             className="prose prose-lg max-w-none"
           >
             <Card className="p-8 bg-muted/50 border-none">
-              <h2 className="text-2xl font-heading font-bold mb-4">My Artistic Journey</h2>
+              <h2 className="text-2xl font-heading font-bold mb-4">{t('about.myJourney')}</h2>
               <p className="text-muted-foreground mb-4">
-                My art is deeply rooted in the rich cultural tapestry of Uzbekistan. Growing up surrounded by
-                the intricate patterns of traditional crafts, the vibrant colors of the markets, and the
-                timeless beauty of ancient architecture, I found my calling in visual storytelling.
+                {t('about.journeyText1')}
               </p>
               <p className="text-muted-foreground">
-                Each piece I create is an exploration of identity, heritage, and the universal human
-                experience. Through various mediums—from traditional oil and watercolor to contemporary
-                digital art—I seek to bridge the past and present, creating works that resonate with both
-                local and global audiences.
+                {t('about.journeyText2')}
               </p>
             </Card>
           </motion.div>

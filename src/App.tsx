@@ -16,9 +16,9 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import "./i18n/config";
-import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +35,6 @@ const App = () => (
               <div className="flex flex-col min-h-screen">
                 <Header />
                 <main className="flex-1">
-                  <ScrollToTop />
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/gallery" element={<Gallery />} />
@@ -44,6 +43,7 @@ const App = () => (
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/faq" element={<FAQ />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
