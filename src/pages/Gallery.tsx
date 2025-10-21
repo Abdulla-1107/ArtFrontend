@@ -216,6 +216,9 @@ const Gallery = () => {
             <p className="text-muted-foreground text-xl font-heading">
               No artworks found in this category
             </p>
+            <p className="text-muted-foreground text-xl font-heading">
+              {t("gallery.noArtworks")}
+            </p>
           </motion.div>
         )}
       </div>

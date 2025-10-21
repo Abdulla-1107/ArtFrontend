@@ -26,7 +26,7 @@ const Contact = () => {
 
     toast({
       title: t('contact.success'),
-      description: "I'll get back to you soon!",
+      description: t('contact.successDescription'),
     });
 
     setFormData({ name: '', email: '', message: '' });
@@ -161,7 +161,7 @@ const Contact = () => {
                       disabled={loading}
                       className="w-full shadow-elegant"
                     >
-                      {loading ? 'Sending...' : t('contact.send')}
+                      {loading ? t('contact.sending') : t('contact.send')}
                     </Button>
                   </form>
                 </CardContent>

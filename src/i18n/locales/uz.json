@@ -4,6 +4,7 @@
     "gallery": "Galereya",
     "about": "Haqida",
     "blog": "Blog",
+    "faq": "Savollar",
     "contact": "Aloqa",
     "cart": "Savatcha"
   },
@@ -46,6 +47,7 @@
     "sortPriceLow": "Narx: kamdan ko'pga",
     "sortPriceHigh": "Narx: ko'pdan kamga",
     "sortName": "Nomi bo'yicha",
+    "noArtworks": "Ushbu kategoriyada asarlar topilmadi",
     "filter": {
       "all": "Hammasi",
       "oil": "Moyli bo'yoq",
@@ -62,7 +64,15 @@
     "dimensions": "O'lchamlar",
     "inCart": "Savatchada",
     "viewDetails": "Batafsil",
-    "shareOn": "Ulashish"
+    "shareOn": "Ulashish",
+    "backToGallery": "Galereyaga qaytish",
+    "artworkNotFound": "Asar topilmadi",
+    "clickToViewFull": "To'liq ko'rish uchun bosing",
+    "share": "Ulashish",
+    "tweet": "Tweet",
+    "copyLink": "Havolani nusxalash",
+    "linkCopied": "Havola nusxalandi!",
+    "linkCopiedDesc": "Asar havolasi buferga nusxalandi"
   },
   "purchase": {
     "title": "Xaridni rasmiylashtirish",
@@ -132,12 +142,20 @@
     "item": "mahsulot",
     "items": "mahsulot",
     "purchaseSuccess": "Xarid tugallandi!",
-    "purchaseSuccessMessage": "Buyurtmangiz muvaffaqiyatli rasmiylashtirildi. Tez orada siz bilan bog'lanamiz!"
+    "purchaseSuccessMessage": "Buyurtmangiz muvaffaqiyatli rasmiylashtirildi. Tez orada siz bilan bog'lanamiz!",
+    "orderSummary": "Buyurtma tafsilotlari",
+    "itemsCount": "Mahsulotlar",
+    "browseGallery": "Galereyamizni ko'rib chiqing va kolleksiyangiz uchun eng mos asarni toping."
   },
   "about": {
     "title": "Bibisora haqida",
     "subtitle": "O'zbek rassomi va ijodiy ruh",
-    "bio": "Bibisora iqtidorli o'zbek rassomi bo'lib, uning ishlari an'anaviy Markaziy Osiyo estetikasini zamonaviy badiiy ifoda bilan birlashtiradi. Uning rasmlari o'zlik, madaniy meros va kundalik hayot go'zalligi mavzularini o'rganadi. Har bir asar ishtiyoq va batafsil e'tibor bilan yaratilgan, har bir asarni noyob xazinaga aylantiradi."
+    "bio": "Bibisora iqtidorli o'zbek rassomi bo'lib, uning ishlari an'anaviy Markaziy Osiyo estetikasini zamonaviy badiiy ifoda bilan birlashtiradi. Uning rasmlari o'zlik, madaniy meros va kundalik hayot go'zalligi mavzularini o'rganadi. Har bir asar ishtiyoq va batafsil e'tibor bilan yaratilgan, har bir asarni noyob xazinaga aylantiradi.",
+    "artworksCreated": "Yaratilgan asarlar",
+    "yearsExperience": "Yillik tajriba",
+    "myJourney": "Mening ijodiy sayohatim",
+    "journeyText1": "Mening san'atim O'zbekistonning boy madaniy palitrasi bilan chambarchas bog'liq. An'anaviy hunarmandchilik naqshlarining murakkabligi, bozorlarning jonli ranglari va qadimiy arxitekturaning abadiy go'zalligi bilan o'rab olingan holda o'sib, men vizual hikoya qilishda o'z chaqiriqimni topdim.",
+    "journeyText2": "Yaratadigan har bir asarim o'zlik, meros va umumbashariy tajribani o'rganishdir. Turli vositalar orqali — an'anaviy moyli va akvareldan zamonaviy raqamli san'atgacha — men o'tmish va hozirnini bog'lashga intilib, mahalliy va global tinglovchilarda aks-sado beradigan asarlar yarataman."
   },
   "contact": {
     "title": "Bog'laning",
@@ -146,13 +164,35 @@
     "email": "Emailingiz",
     "message": "Xabaringiz",
     "send": "Xabar yuborish",
+    "sending": "Yuborilmoqda...",
     "success": "Xabar muvaffaqiyatli yuborildi!",
-    "error": "Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring."
+    "error": "Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring.",
+    "successDescription": "Tez orada siz bilan bog'lanaman!"
   },
   "footer": {
     "description": "O'zbek rassomi Bibisoraning asl asarlari. Har bir asar o'ziga xos hikoyani aytib beradi.",
     "quickLinks": "Tezkor havolalar",
     "rights": "Barcha huquqlar himoyalangan.",
     "followMe": "Kuzatib boring"
+  },
+  "faq": {
+    "title": "Ko'p so'raladigan savollar",
+    "subtitle": "Buyurtmalar, to'lovlar, yetkazib berish va boshqalar haqida javoblarni toping.",
+    "q1": "Qanday qilib buyurtma berishim mumkin?",
+    "a1": "Siz bizning galereyamizni ko'rib chiqishingiz, asarni tanlashingiz va 'Hozir sotib olish' tugmasini bosishingiz yoki savatga qo'shishingiz mumkin. Kontakt ma'lumotlaringizni to'ldiring va biz xaridni yakunlash va yetkazib berish tafsilotlarini muhokama qilish uchun siz bilan bog'lanamiz.",
+    "q2": "Qanday to'lov usullarini qabul qilasiz?",
+    "a2": "Biz bank o'tkazmalarini, naqd to'lovlarni va buyurtma berilgandan keyin har bir xaridor bilan alohida muhokama qilinadigan boshqa usullarni qabul qilamiz.",
+    "q3": "Yetkazib berish qancha vaqt oladi?",
+    "a3": "Yetkazib berish vaqti sizning joylashuvingizga va tanlangan yetkazib berish usuliga bog'liq. Buyurtma bergandan keyin barcha tafsilotlarni shaxsan muhokama qilamiz. Odatda, shahar bo'ylab yetkazib berish 2-3 kun, xalqaro yetkazib berish esa 1-2 hafta davom etishi mumkin.",
+    "q4": "Asarni qaytarishim yoki almashtirishim mumkinmi?",
+    "a4": "Qaytarish va almashtirish faqat xariddan oldin oshkor etilmagan jiddiy nuqsonlar bo'lgan taqdirdagina mumkin. Iltimos, asarni olgandan keyin 3 kun ichida bizga xabar bering. Maxsus buyurtma qilingan asarlar qaytarilmaydi.",
+    "q5": "Xalqaro yetkazib berasizmi?",
+    "a5": "Ha, biz xalqaro yetkazib berishni taklif qilamiz. Yetkazib berish narxi va muddatlari manzilga qarab farq qiladi. Biz barcha asarlarning xavfsiz qadoqlanishini ta'minlaymiz.",
+    "q6": "Maxsus asar buyurtma qilishim mumkinmi?",
+    "a6": "Albatta! Biz maxsus buyurtmalarni qabul qilamiz. Iltimos, g'oyalaringiz, afzal ko'rgan o'lchami, uslubi va boshqa tafsilotlar bilan biz bilan bog'laning. Loyihani muhokama qilamiz va sizga narx taklif qilamiz.",
+    "q7": "Asarlarga mualliflik huquqi kimga tegishli?",
+    "a7": "Rassom barcha mualliflik huquqlari va intellektual mulk huquqlarini saqlab qoladi. Asar sotib olganingizda, siz faqat jismoniy narsaga egalik huquqini olasiz. Asar tasvirini ko'paytirish yoki tijorat maqsadida foydalanish uchun rassomning yozma roziligi talab qilinadi.",
+    "stillHaveQuestions": "Yana savollaringiz bormi?",
+    "contactUs": "Biz bilan bog'laning"
   }
 }

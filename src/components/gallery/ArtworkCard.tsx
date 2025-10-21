@@ -77,7 +77,6 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
                 {getTitle()}
               </h3>
             </Link>
-           
 
             <div className="flex items-center justify-between gap-3">
               <span className="text-2xl font-bold text-primary">
