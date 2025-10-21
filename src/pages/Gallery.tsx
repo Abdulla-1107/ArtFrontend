@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { API } from "@/hooks/getEnv";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { log } from "console";
 
 type Category = "all" | "oil" | "watercolor" | "digital" | "mixed";
 type SortOption = "newest" | "price-low" | "price-high" | "name";
@@ -35,14 +36,15 @@ const Gallery = () => {
       return res.data;
     },
   });
+  console.log(data, "data");
 
-  const categories: Category[] = [
-    "all",
-    "oil",
-    "watercolor",
-    "digital",
-    "mixed",
-  ];
+  const categories = Array.from(
+    new Set(
+      data?.data
+        ?.map((artwork: any) => artwork.category)
+        .filter((c: any) => Boolean(c))
+    )
+  );
 
   let filteredArtworks = artworks.filter((artwork) => {
     const categoryMatch =
@@ -183,7 +185,7 @@ const Gallery = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
-          {categories.map((category) => (
+          {categories.map((category: any) => (
             <Button
               key={category}
               onClick={() => setActiveCategory(category)}
@@ -202,12 +204,12 @@ const Gallery = () => {
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
         >
-          {filteredArtworks.map((artwork, index) => (
+          {data?.data?.map((artwork, index) => (
             <ArtworkCard key={artwork.id} artwork={artwork} index={index} />
           ))}
         </motion.div>
 
-        {filteredArtworks.length === 0 && (
+        {data?.data?.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -23,32 +23,31 @@ import { ImageLightbox } from "@/components/gallery/ImageLightbox";
 import { PurchaseDialog } from "@/components/purchase/PurchaseDialog";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { API } from "@/hooks/getEnv";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
+  console.log(id, "d");
+
   const { t, i18n } = useTranslation();
   const { addToCart, isInCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isPurchaseDialogOpen, setIsPurchaseDialogOpen] = useState(false);
 
-  // ✅ BACKENDDAN MA'LUMOT OLYAPMIZ
   const {
-    data: artworks = [],
+    data: artwork,
     isLoading,
     isError,
   } = useQuery({
     queryKey: ["artworks"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://your-backend-url.com/api/artworks"
-      );
-      return data;
+      const res = await axios.get(`${API}/artwork/${id}`);
+
+      return res.data.data;
     },
   });
-
-  // ✅ ID bo‘yicha kerakli artworkni topamiz
-  const artwork = artworks.find((a: any) => String(a.id) === String(id));
+  console.log(artwork, "art");
 
   if (isLoading) {
     return (
@@ -58,7 +57,7 @@ const ArtworkDetail = () => {
     );
   }
 
-  if (isError || !artwork) {
+  if (isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -154,7 +153,7 @@ const ArtworkDetail = () => {
               onClick={() => setLightboxOpen(true)}
             >
               <img
-                src={artwork.image}
+                src={artwork.imageUrl}
                 alt={getTitle()}
                 className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -242,7 +241,6 @@ const ArtworkDetail = () => {
                   <span className="text-muted-foreground">
                     {t("artwork.dimensions")}
                   </span>
-                  <span className="font-medium">{artwork.dimensions}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">
@@ -291,7 +289,7 @@ const ArtworkDetail = () => {
         <ImageLightbox
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
-          image={artwork.image}
+          image={artwork.imageUrl}
           title={getTitle()}
         />
 
