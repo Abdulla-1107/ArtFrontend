@@ -1,18 +1,28 @@
-import { useParams, Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
-import { ShoppingCart, Check, ArrowLeft, Heart, Share2, Facebook, Twitter, CreditCard } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { useCart } from '@/contexts/CartContext';
-import { useFavorites } from '@/contexts/FavoritesContext';
-import { artworks } from '@/data/artworks';
-import { toast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
-import { useState } from 'react';
-import { ImageLightbox } from '@/components/gallery/ImageLightbox';
-import { PurchaseDialog } from '@/components/purchase/PurchaseDialog';
+import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import {
+  ShoppingCart,
+  Check,
+  ArrowLeft,
+  Heart,
+  Share2,
+  Facebook,
+  Twitter,
+  CreditCard,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { ImageLightbox } from "@/components/gallery/ImageLightbox";
+import { PurchaseDialog } from "@/components/purchase/PurchaseDialog";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
@@ -22,13 +32,39 @@ const ArtworkDetail = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isPurchaseDialogOpen, setIsPurchaseDialogOpen] = useState(false);
 
-  const artwork = artworks.find((a) => a.id === id);
+  // ✅ BACKENDDAN MA'LUMOT OLYAPMIZ
+  const {
+    data: artworks = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["artworks"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        "https://your-backend-url.com/api/artworks"
+      );
+      return data;
+    },
+  });
 
-  if (!artwork) {
+  // ✅ ID bo‘yicha kerakli artworkni topamiz
+  const artwork = artworks.find((a: any) => String(a.id) === String(id));
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-muted-foreground">Loading artwork...</p>
+      </div>
+    );
+  }
+
+  if (isError || !artwork) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-heading font-bold mb-4">Artwork not found</h1>
+          <h1 className="text-2xl font-heading font-bold mb-4">
+            Artwork not found
+          </h1>
           <Link to="/gallery">
             <Button variant="outline">Back to Gallery</Button>
           </Link>
@@ -39,9 +75,9 @@ const ArtworkDetail = () => {
 
   const getTitle = () => {
     switch (i18n.language) {
-      case 'ru':
+      case "ru":
         return artwork.titleRu;
-      case 'uz':
+      case "uz":
         return artwork.titleUz;
       default:
         return artwork.title;
@@ -50,9 +86,9 @@ const ArtworkDetail = () => {
 
   const getDescription = () => {
     switch (i18n.language) {
-      case 'ru':
+      case "ru":
         return artwork.descriptionRu;
-      case 'uz':
+      case "uz":
         return artwork.descriptionUz;
       default:
         return artwork.description;
@@ -62,18 +98,28 @@ const ArtworkDetail = () => {
   const inCart = isInCart(artwork.id);
   const isFav = isFavorite(artwork.id);
 
-  const handleShare = (platform: 'facebook' | 'twitter' | 'copy') => {
+  const handleShare = (platform: "facebook" | "twitter" | "copy") => {
     const url = window.location.href;
     const text = `Check out "${getTitle()}" by Bibisora`;
-    
+
     switch (platform) {
-      case 'facebook':
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+      case "facebook":
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`,
+          "_blank"
+        );
         break;
-      case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+      case "twitter":
+        window.open(
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+            url
+          )}&text=${encodeURIComponent(text)}`,
+          "_blank"
+        );
         break;
-      case 'copy':
+      case "copy":
         navigator.clipboard.writeText(url);
         toast({
           title: "Link copied!",
@@ -100,7 +146,10 @@ const ArtworkDetail = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="overflow-hidden card-elegant relative group cursor-pointer" onClick={() => setLightboxOpen(true)}>
+            <Card
+              className="overflow-hidden card-elegant relative group cursor-pointer"
+              onClick={() => setLightboxOpen(true)}
+            >
               <img
                 src={artwork.image}
                 alt={getTitle()}
@@ -141,19 +190,36 @@ const ArtworkDetail = () => {
               </div>
             </div>
 
-            <p className="text-lg text-muted-foreground mb-6">{getDescription()}</p>
+            <p className="text-lg text-muted-foreground mb-6">
+              {getDescription()}
+            </p>
 
             {/* Social Share */}
             <div className="flex gap-2 mb-6">
-              <Button variant="outline" size="sm" onClick={() => handleShare('facebook')} className="gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleShare("facebook")}
+                className="gap-2"
+              >
                 <Facebook className="h-4 w-4" />
                 Share
               </Button>
-              <Button variant="outline" size="sm" onClick={() => handleShare('twitter')} className="gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleShare("twitter")}
+                className="gap-2"
+              >
                 <Twitter className="h-4 w-4" />
                 Tweet
               </Button>
-              <Button variant="outline" size="sm" onClick={() => handleShare('copy')} className="gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleShare("copy")}
+                className="gap-2"
+              >
                 <Share2 className="h-4 w-4" />
                 Copy Link
               </Button>
@@ -162,16 +228,26 @@ const ArtworkDetail = () => {
             <Card className="mb-6 bg-muted/50 border-none">
               <CardContent className="p-6 space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">{t('artwork.price')}</span>
-                  <span className="text-3xl font-bold text-primary">${artwork.price}</span>
+                  <span className="text-muted-foreground">
+                    {t("artwork.price")}
+                  </span>
+                  <span className="text-3xl font-bold text-primary">
+                    ${artwork.price}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">{t('artwork.dimensions')}</span>
+                  <span className="text-muted-foreground">
+                    {t("artwork.dimensions")}
+                  </span>
                   <span className="font-medium">{artwork.dimensions}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">{t('artwork.category')}</span>
-                  <span className="font-medium">{t(`gallery.filter.${artwork.category}`)}</span>
+                  <span className="text-muted-foreground">
+                    {t("artwork.category")}
+                  </span>
+                  <span className="font-medium">
+                    {t(`gallery.filter.${artwork.category}`)}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -187,12 +263,12 @@ const ArtworkDetail = () => {
                 {inCart ? (
                   <>
                     <Check className="h-5 w-5" />
-                    {t('artwork.inCart')}
+                    {t("artwork.inCart")}
                   </>
                 ) : (
                   <>
                     <ShoppingCart className="h-5 w-5" />
-                    {t('artwork.addToCart')}
+                    {t("artwork.addToCart")}
                   </>
                 )}
               </Button>
@@ -203,7 +279,7 @@ const ArtworkDetail = () => {
                 className="flex-1 gap-2 text-lg py-6 shadow-elegant"
               >
                 <CreditCard className="h-5 w-5" />
-                {t('artwork.buyNow')}
+                {t("artwork.buyNow")}
               </Button>
             </div>
           </motion.div>
@@ -223,8 +299,8 @@ const ArtworkDetail = () => {
           artworkPrice={artwork.price}
           onConfirm={() => {
             toast({
-              title: t('purchase.success.title'),
-              description: t('purchase.success.message'),
+              title: t("purchase.success.title"),
+              description: t("purchase.success.message"),
               duration: 5000,
             });
           }}

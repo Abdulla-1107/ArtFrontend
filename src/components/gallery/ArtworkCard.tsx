@@ -48,7 +48,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
               onClick={() => setLightboxOpen(true)}
             >
               <img
-                src={artwork.image}
+                src={artwork.imageUrl}
                 alt={getTitle()}
                 loading="lazy"
                 className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
@@ -77,9 +77,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
                 {getTitle()}
               </h3>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              {artwork.dimensions}
-            </p>
+           
 
             <div className="flex items-center justify-between gap-3">
               <span className="text-2xl font-bold text-primary">
@@ -102,7 +100,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
       <ImageLightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        image={artwork.image}
+        image={artwork.imageUrl}
         title={getTitle()}
       />
     </>

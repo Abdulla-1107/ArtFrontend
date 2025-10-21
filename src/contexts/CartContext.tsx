@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { toast } from '@/hooks/use-toast';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "@/hooks/use-toast";
 
 export interface Artwork {
   id: string;
@@ -9,10 +9,9 @@ export interface Artwork {
   description: string;
   descriptionRu: string;
   descriptionUz: string;
-  category: 'oil' | 'watercolor' | 'digital' | 'mixed';
+  category: string;
   price: number;
-  image: string;
-  dimensions: string;
+  imageUrl: string;
 }
 
 export interface CartItem extends Artwork {
@@ -31,14 +30,16 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('cart');
+    const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (artwork: Artwork) => {
@@ -103,7 +104,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };
