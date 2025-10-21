@@ -16,6 +16,13 @@ export const useArtwork = () => {
         api.get("/artwork", { params: props }).then((res) => res.data), // ✅
     });
 
+  const getOneArtwork = (id: string) =>
+    useQuery({
+      queryKey: ["artwork", id],
+      queryFn: () => api.get(`/artwork/${id}`).then((res) => res.data),
+      enabled: !!id, // ID mavjud bo‘lgandagina so‘rov yuboradi
+    });
+
   const createArtwork = useMutation({
     mutationFn: (body: any) =>
       api.post("/artwork", body).then((res) => res.data), // ✅
@@ -39,5 +46,6 @@ export const useArtwork = () => {
     getArtwork,
     deleteArtwork,
     createArtwork,
+    getOneArtwork,
   };
 };
