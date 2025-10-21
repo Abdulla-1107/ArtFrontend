@@ -9,21 +9,21 @@
     "cart": "Cart"
   },
   "hero": {
-    "title": "Discover Original Art",
-    "subtitle": "by Bibisora",
-    "description": "Explore a unique collection of paintings and digital artworks by Uzbek artist Bibisora. Each piece tells a story of culture, emotion, and beauty.",
+    "title": "Discover True Art",
+    "subtitle": "By Bibisora",
+    "description": "Explore the unique collection of paintings and digital art by Uzbek artist Bibisora. Each piece tells a story of culture, emotion, and beauty.",
     "cta": "View Gallery"
   },
   "featured": {
-    "title": "Featured Artworks",
-    "viewAll": "View All Gallery"
+    "title": "Featured Works",
+    "viewAll": "View Full Gallery"
   },
   "testimonials": {
     "title": "What Art Lovers Say"
   },
   "newsletter": {
-    "title": "Subscribe to New Artworks",
-    "description": "Be the first to know about new creations, exhibitions, and exclusive offers.",
+    "title": "Subscribe for Updates",
+    "description": "Be the first to know about new works, exhibitions, and special offers.",
     "placeholder": "Enter your email",
     "subscribe": "Subscribe",
     "sending": "Sending...",
@@ -32,7 +32,7 @@
   },
   "blog": {
     "title": "Art Journal",
-    "subtitle": "Stories, inspirations, and insights from my creative journey"
+    "subtitle": "Stories, inspiration, and thoughts from my creative journey"
   },
   "gallery": {
     "title": "Art Gallery",
@@ -43,10 +43,10 @@
     "300to400": "$300 - $400",
     "over400": "Over $400",
     "sort": "Sort By",
-    "sortNewest": "Newest",
+    "sortNewest": "Newest First",
     "sortPriceLow": "Price: Low to High",
     "sortPriceHigh": "Price: High to Low",
-    "sortName": "Name",
+    "sortName": "By Name",
     "noArtworks": "No artworks found in this category",
     "filter": {
       "all": "All",
@@ -64,135 +64,40 @@
     "dimensions": "Dimensions",
     "inCart": "In Cart",
     "viewDetails": "View Details",
-    "shareOn": "Share on",
+    "shareOn": "Share On",
     "backToGallery": "Back to Gallery",
     "artworkNotFound": "Artwork not found",
-    "clickToViewFull": "Click to view full size",
+    "clickToViewFull": "Click to view full image",
     "share": "Share",
     "tweet": "Tweet",
     "copyLink": "Copy Link",
-    "linkCopied": "Link copied!",
-    "linkCopiedDesc": "The artwork link has been copied to clipboard"
+    "linkCopied": "Link Copied!",
+    "linkCopiedDesc": "Artwork link copied to clipboard"
   },
   "purchase": {
-    "title": "Complete Your Purchase",
+    "title": "Checkout",
     "form": {
       "name": "Full Name",
       "namePlaceholder": "Enter your full name",
       "phone": "Phone Number",
-      "email": "Email Address",
-      "emailPlaceholder": "your.email@example.com",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
       "optional": "optional",
-      "agreeToTerms": "I agree to the terms and conditions of the",
+      "agreeToTerms": "I agree to the terms",
       "oferta": "Public Offer",
       "confirm": "Confirm Purchase"
     },
     "errors": {
       "nameRequired": "Name is required",
       "phoneRequired": "Phone number is required",
-      "phoneInvalid": "Please enter a valid phone number",
-      "emailInvalid": "Please enter a valid email address",
+      "phoneInvalid": "Enter a valid phone number",
+      "emailInvalid": "Enter a valid email address",
       "termsRequired": "You must agree to the terms"
     },
     "success": {
       "title": "Thank You!",
-      "message": "Your purchase request has been received. We will contact you soon.",
-      "thankYou": "We appreciate your interest in art"
+      "message": "Your purchase request has been received. We’ll contact you soon.",
+      "thankYou": "Thank you for your interest in art"
     }
-  },
-  "oferta": {
-    "title": "Public Offer Agreement",
-    "section1": {
-      "title": "1. General Provisions",
-      "content": "This public offer (hereinafter referred to as the 'Offer') is an official offer by the Artist to enter into an agreement for the sale of artworks presented on this website. By submitting a purchase request, the Buyer accepts all terms of this Offer."
-    },
-    "section2": {
-      "title": "2. Subject of the Agreement",
-      "content": "The Artist undertakes to transfer ownership of the artwork to the Buyer, and the Buyer undertakes to accept and pay for the artwork under the terms specified in this Offer. The artwork includes:",
-      "item1": "Original paintings (oil, acrylic, watercolor, etc.)",
-      "item2": "Digital art prints and reproductions",
-      "item3": "Limited edition artworks",
-      "item4": "Custom commissioned pieces"
-    },
-    "section3": {
-      "title": "3. Order and Payment",
-      "content": "The Buyer places an order by filling out the purchase form on the website. After receiving the order, the Artist contacts the Buyer to confirm details, discuss delivery methods, and arrange payment. Payment is made by agreement between the parties (bank transfer, cash, or other methods)."
-    },
-    "section4": {
-      "title": "4. Delivery",
-      "content": "Delivery terms, methods, and costs are discussed individually with each Buyer. The Artist ensures safe packaging of the artwork. Risk of accidental loss or damage passes to the Buyer upon receipt of the artwork."
-    },
-    "section5": {
-      "title": "5. Returns and Exchanges",
-      "content": "Returns and exchanges are possible only in case of significant defects in the artwork that were not disclosed prior to purchase. The Buyer must notify the Artist within 3 days of receiving the artwork. Custom commissioned pieces are non-refundable."
-    },
-    "section6": {
-      "title": "6. Copyright and Intellectual Property",
-      "content": "The Artist retains copyright to all artworks. The Buyer acquires only ownership of the physical object. Reproduction, copying, or commercial use of the artwork's image without the Artist's written consent is prohibited."
-    },
-    "lastUpdated": "Last updated: January 2025"
-  },
-  "cart": {
-    "title": "Shopping Cart",
-    "empty": "Your cart is empty",
-    "continueShopping": "Continue Shopping",
-    "subtotal": "Subtotal",
-    "checkout": "Proceed to Checkout",
-    "remove": "Remove",
-    "item": "item",
-    "items": "items",
-    "purchaseSuccess": "Purchase Completed!",
-    "purchaseSuccessMessage": "Your order has been successfully submitted. We will contact you soon!",
-    "orderSummary": "Order Summary",
-    "itemsCount": "Items",
-    "browseGallery": "Browse our gallery and find the perfect artwork for your collection."
-  },
-  "about": {
-    "title": "About Bibisora",
-    "subtitle": "Uzbek Artist & Creative Soul",
-    "bio": "Bibisora is a talented Uzbek artist whose work bridges traditional Central Asian aesthetics with contemporary artistic expression. Her paintings explore themes of identity, cultural heritage, and the beauty of everyday life. Each artwork is created with passion and meticulous attention to detail, making every piece a unique treasure.",
-    "artworksCreated": "Artworks Created",
-    "yearsExperience": "Years Experience",
-    "myJourney": "My Artistic Journey",
-    "journeyText1": "My art is deeply rooted in the rich cultural tapestry of Uzbekistan. Growing up surrounded by the intricate patterns of traditional crafts, the vibrant colors of the markets, and the timeless beauty of ancient architecture, I found my calling in visual storytelling.",
-    "journeyText2": "Each piece I create is an exploration of identity, heritage, and the universal human experience. Through various mediums—from traditional oil and watercolor to contemporary digital art—I seek to bridge the past and present, creating works that resonate with both local and global audiences."
-  },
-  "contact": {
-    "title": "Get In Touch",
-    "subtitle": "Have questions? I'd love to hear from you.",
-    "name": "Your Name",
-    "email": "Your Email",
-    "message": "Your Message",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent successfully!",
-    "error": "Failed to send message. Please try again.",
-    "successDescription": "I'll get back to you soon!"
-  },
-  "footer": {
-    "description": "Original artworks by Uzbek artist Bibisora. Each piece tells a unique story.",
-    "quickLinks": "Quick Links",
-    "rights": "All rights reserved.",
-    "followMe": "Follow Me"
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "subtitle": "Find answers to common questions about orders, payments, delivery, and more.",
-    "q1": "How can I place an order?",
-    "a1": "You can browse our gallery, select an artwork, and click 'Buy Now' or add it to your cart. Fill in your contact details and we will reach out to finalize the purchase and delivery details.",
-    "q2": "What payment methods do you accept?",
-    "a2": "We accept bank transfers, cash payments, and other methods that can be discussed individually with each buyer after the order is placed.",
-    "q3": "How long does delivery take?",
-    "a3": "Delivery time depends on your location and the chosen delivery method. We will discuss all details personally after you place your order. Typically, delivery within the city takes 2-3 days, and international shipping may take 1-2 weeks.",
-    "q4": "Can I return or exchange an artwork?",
-    "a4": "Returns and exchanges are possible only if the artwork has significant defects that were not disclosed before purchase. Please notify us within 3 days of receiving the artwork. Custom commissioned pieces are non-refundable.",
-    "q5": "Do you ship internationally?",
-    "a5": "Yes, we offer international shipping. Shipping costs and delivery times vary by destination. We ensure safe packaging for all artworks during transit.",
-    "q6": "Can I request a custom artwork?",
-    "a6": "Absolutely! We welcome custom commissions. Please contact us with your ideas, preferred size, style, and any other details. We will discuss the project and provide you with a quote.",
-    "q7": "Who owns the copyright to the artworks?",
-    "a7": "The artist retains all copyright and intellectual property rights to the artworks. When you purchase an artwork, you acquire ownership of the physical piece only. Reproduction or commercial use of the artwork's image requires written consent from the artist.",
-    "stillHaveQuestions": "Still have questions?",
-    "contactUs": "Contact us"
   }
 }
