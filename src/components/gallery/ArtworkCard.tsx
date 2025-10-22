@@ -31,6 +31,17 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
     }
   };
 
+  const getDescription = () => {
+    switch (i18n.language) {
+      case "ru":
+        return artwork.description_ru || "";
+      case "uz":
+        return artwork.description_uz || "";
+      default:
+        return artwork.description_en || "";
+    }
+  };
+
   const isFav = isFavorite(artwork.id);
 
   return (
@@ -41,20 +52,20 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: index * 0.1 }}
       >
-        <Card className="group overflow-hidden hover-lift card-elegant border-0 shadow-soft">
-          <div className="relative">
-            <div
-              className="relative aspect-[3/4] overflow-hidden bg-muted/30 cursor-pointer"
-              onClick={() => setLightboxOpen(true)}
-            >
-              <img
-                src={artwork.imageUrl}
-                alt={getTitle()}
-                loading="lazy"
-                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
+        <Card
+          className={cn(
+            "group overflow-hidden border border-border/50 shadow-md hover:shadow-xl transition-all duration-500 rounded-2xl bg-card flex flex-col"
+          )}
+        >
+          {/* IMAGE */}
+          <div className="relative aspect-[3/4] overflow-hidden cursor-pointer" onClick={() => setLightboxOpen(true)}>
+            <img
+              src={artwork.imageUrl}
+              alt={getTitle()}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <Button
               variant="ghost"
               size="icon"
@@ -63,7 +74,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
                 toggleFavorite(artwork.id, getTitle());
               }}
               className={cn(
-                "absolute top-4 right-4 z-10 bg-card/90 backdrop-blur-md hover:bg-card rounded-full shadow-md transition-all duration-300",
+                "absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-md hover:bg-white rounded-full shadow-md transition-all duration-300",
                 isFav && "text-red-500"
               )}
             >
@@ -71,21 +82,24 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
             </Button>
           </div>
 
-          <CardContent className="p-6">
+          {/* CONTENT */}
+          <CardContent className="flex flex-col flex-1 p-5">
             <Link to={`/artwork/${artwork.id}`}>
-              <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+              <h3 className="font-heading text-lg md:text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                 {getTitle()}
               </h3>
             </Link>
 
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-2xl font-bold text-primary">
-                ${artwork.price}
-              </span>
+            <p className="text-muted-foreground text-sm line-clamp-3 min-h-[60px] mb-4">
+              {getDescription()}
+            </p>
+
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-primary">${artwork.price}</span>
               <Link to={`/artwork/${artwork.id}`}>
                 <Button
                   size="sm"
-                  className="gap-2 rounded-full transition-all duration-300"
+                  className="gap-2 rounded-full transition-all duration-300 hover:scale-105"
                 >
                   <Eye className="h-4 w-4" />
                   {t("artwork.viewDetails")}
@@ -96,6 +110,7 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
         </Card>
       </motion.div>
 
+      {/* LIGHTBOX */}
       <ImageLightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
