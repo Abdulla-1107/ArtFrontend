@@ -94,7 +94,6 @@ const ArtworkDetail = () => {
               onClick={() => setLightboxOpen(true)}
             >
               <img
-
                 src={artwork.imageUrl || "/placeholder.jpg"}
                 alt={artwork.title}
                 className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
@@ -146,7 +145,6 @@ const ArtworkDetail = () => {
                   <span className="text-muted-foreground">
                     {t("artwork.price")}
                   </span>
-                  
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">
@@ -212,7 +210,6 @@ const ArtworkDetail = () => {
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
           image={artwork.imageUrl}
-
           title={artwork.title}
         />
 
