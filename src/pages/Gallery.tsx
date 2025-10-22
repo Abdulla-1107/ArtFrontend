@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { ArtworkCard } from "@/components/gallery/ArtworkCard";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -12,100 +11,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
 import { API } from "@/hooks/getEnv";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { log } from "console";
+import { useDebounce } from "use-debounce";
 
-type Category = "all" | "oil" | "watercolor" | "digital" | "mixed";
 type SortOption = "newest" | "price-low" | "price-high" | "name";
 
 const Gallery = () => {
-  const { t, i18n } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("newest");
   const [priceRange, setPriceRange] = useState<string>("all");
-  const [artworks, setArtworks] = useState<any[]>([]);
 
-  const { data } = useQuery({
-    queryKey: ["gallery"],
+  // 🔹 Debounce (500ms)
+  const [debouncedSearch] = useDebounce(searchQuery, 500);
+
+  // 🔹 Backenddan ma’lumot olish
+  const { data, isLoading } = useQuery({
+    queryKey: ["gallery", debouncedSearch, sortBy, priceRange],
     queryFn: async () => {
-      const res = await axios.get(`${API}/artwork`);
+      const res = await axios.get(`${API}/artwork`, {
+        params: {
+          search: debouncedSearch || undefined,
+          sort: sortBy !== "newest" ? sortBy : undefined,
+          priceRange: priceRange !== "all" ? priceRange : undefined,
+        },
+      });
       return res.data;
     },
-  });
-  console.log(data, "data");
-
-  const categories = Array.from(
-    new Set(
-      data?.data
-        ?.map((artwork: any) => artwork.category)
-        .filter((c: any) => Boolean(c))
-    )
-  );
-
-  let filteredArtworks = artworks.filter((artwork) => {
-    const categoryMatch =
-      activeCategory === "all" || artwork.category === activeCategory;
-
-    let priceMatch = true;
-    if (priceRange === "under-300") priceMatch = artwork.price < 300;
-    else if (priceRange === "300-400")
-      priceMatch = artwork.price >= 300 && artwork.price < 400;
-    else if (priceRange === "over-400") priceMatch = artwork.price >= 400;
-
-    const query = searchQuery.toLowerCase();
-    const title =
-      i18n.language === "ru"
-        ? artwork.titleRu
-        : i18n.language === "uz"
-        ? artwork.titleUz
-        : artwork.title;
-    const description =
-      i18n.language === "ru"
-        ? artwork.descriptionRu
-        : i18n.language === "uz"
-        ? artwork.descriptionUz
-        : artwork.description;
-
-    const searchMatch =
-      !searchQuery ||
-      title.toLowerCase().includes(query) ||
-      description.toLowerCase().includes(query);
-
-    return categoryMatch && priceMatch && searchMatch;
-  });
-
-  filteredArtworks = [...filteredArtworks].sort((a, b) => {
-    switch (sortBy) {
-      case "price-low":
-        return a.price - b.price;
-      case "price-high":
-        return b.price - a.price;
-      case "name":
-        const titleA =
-          i18n.language === "ru"
-            ? a.titleRu
-            : i18n.language === "uz"
-            ? a.titleUz
-            : a.title;
-        const titleB =
-          i18n.language === "ru"
-            ? b.titleRu
-            : i18n.language === "uz"
-            ? b.titleUz
-            : b.title;
-        return titleA.localeCompare(titleB);
-      default:
-        return 0;
-    }
   });
 
   return (
     <div className="min-h-screen py-16 bg-gradient-to-b from-secondary/20 to-background">
       <div className="container mx-auto px-4">
+        {/* --- TITLE --- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,6 +58,7 @@ const Gallery = () => {
           <div className="section-divider" />
         </motion.div>
 
+        {/* --- SEARCH & FILTERS --- */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,6 +66,7 @@ const Gallery = () => {
           className="max-w-5xl mx-auto mb-12"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* 🔍 SEARCH */}
             <div className="relative md:col-span-2">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
@@ -135,6 +77,8 @@ const Gallery = () => {
                 className="pl-12 py-6 rounded-full border-2 shadow-soft"
               />
             </div>
+
+            {/* 🔽 FILTERS */}
             <div className="flex gap-2">
               <Select value={priceRange} onValueChange={setPriceRange}>
                 <SelectTrigger className="rounded-full py-6 border-2">
@@ -154,6 +98,7 @@ const Gallery = () => {
                   </SelectItem>
                 </SelectContent>
               </Select>
+
               <Select
                 value={sortBy}
                 onValueChange={(value) => setSortBy(value as SortOption)}
@@ -178,50 +123,48 @@ const Gallery = () => {
           </div>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
-        >
-          {categories.map((category: any) => (
-            <Button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              variant={activeCategory === category ? "default" : "outline"}
-              className={cn(
-                "transition-all duration-500 rounded-full px-6 py-5",
-                activeCategory === category && "shadow-elegant scale-105"
-              )}
-            >
-              {t(`gallery.filter.${category}`)}
-            </Button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
-        >
-          {data?.data?.map((artwork, index) => (
-            <ArtworkCard key={artwork.id} artwork={artwork} index={index} />
-          ))}
-        </motion.div>
-
-        {data?.data?.length === 0 && (
+        {/* --- CONTENT --- */}
+        {isLoading ? (
+          // 🌀 Loading skeleton
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-24"
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
           >
-            <p className="text-muted-foreground text-xl font-heading">
-              No artworks found in this category
-            </p>
-            <p className="text-muted-foreground text-xl font-heading">
-              {t("gallery.noArtworks")}
-            </p>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+                className="bg-muted/30 rounded-2xl h-[350px] animate-pulse"
+              />
+            ))}
           </motion.div>
+        ) : (
+          <>
+            {/* 🖼️ Artwork list */}
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+            >
+              {data?.data?.map((artwork: any, index: number) => (
+                <ArtworkCard key={artwork.id} artwork={artwork} index={index} />
+              ))}
+            </motion.div>
+
+            {/* ⚠️ No artworks found */}
+            {data?.data?.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-24"
+              >
+                <p className="text-muted-foreground text-xl font-heading">
+                  {t("gallery.noArtworks")}
+                </p>
+              </motion.div>
+            )}
+          </>
         )}
       </div>
     </div>

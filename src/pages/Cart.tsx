@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Trash2, ShoppingBag } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { useCart } from '@/contexts/CartContext';
-import { PurchaseDialog } from '@/components/purchase/PurchaseDialog';
-import { toast } from '@/hooks/use-toast';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Trash2, ShoppingBag } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/contexts/CartContext";
+import { PurchaseDialog } from "@/components/purchase/PurchaseDialog";
+import { toast } from "@/hooks/use-toast";
 
 const Cart = () => {
   const { t, i18n } = useTranslation();
@@ -17,9 +17,9 @@ const Cart = () => {
 
   const getTitle = (item: any) => {
     switch (i18n.language) {
-      case 'ru':
+      case "ru":
         return item.titleRu;
-      case 'uz':
+      case "uz":
         return item.titleUz;
       default:
         return item.title;
@@ -29,14 +29,16 @@ const Cart = () => {
   const handlePurchaseConfirm = () => {
     clearCart();
     toast({
-      title: t('cart.purchaseSuccess'),
-      description: t('cart.purchaseSuccessMessage'),
+      title: t("cart.purchaseSuccess"),
+      description: t("cart.purchaseSuccessMessage"),
       duration: 5000,
     });
   };
 
   const getPurchaseTitle = () => {
-    return `${t('cart.title')} (${cart.length} ${cart.length === 1 ? t('cart.item') : t('cart.items')})`;
+    return `${t("cart.title")} (${cart.length} ${
+      cart.length === 1 ? t("cart.item") : t("cart.items")
+    })`;
   };
 
   if (cart.length === 0) {
@@ -51,12 +53,14 @@ const Cart = () => {
             <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
               <ShoppingBag className="h-12 w-12 text-muted-foreground" />
             </div>
-            <h2 className="text-2xl font-heading font-bold mb-4">{t('cart.empty')}</h2>
+            <h2 className="text-2xl font-heading font-bold mb-4">
+              {t("cart.empty")}
+            </h2>
             <p className="text-muted-foreground mb-8">
-              {t('cart.browseGallery')}
+              {t("cart.browseGallery")}
             </p>
             <Link to="/gallery">
-              <Button size="lg">{t('cart.continueShopping')}</Button>
+              <Button size="lg">{t("cart.continueShopping")}</Button>
             </Link>
           </motion.div>
         </div>
@@ -73,7 +77,9 @@ const Cart = () => {
           transition={{ duration: 0.6 }}
           className="max-w-5xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-8">{t('cart.title')}</h1>
+          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-8">
+            {t("cart.title")}
+          </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
@@ -88,9 +94,12 @@ const Cart = () => {
                   <Card className="overflow-hidden card-elegant border-border/50">
                     <CardContent className="p-4">
                       <div className="flex gap-4">
-                        <Link to={`/artwork/${item.id}`} className="flex-shrink-0">
+                        <Link
+                          to={`/artwork/${item.id}`}
+                          className="flex-shrink-0"
+                        >
                           <img
-                            src={item.image}
+                            src={item.imageUrl}
                             alt={getTitle(item)}
                             className="w-24 h-24 object-cover rounded-md"
                           />
@@ -102,8 +111,9 @@ const Cart = () => {
                               {getTitle(item)}
                             </h3>
                           </Link>
-                          <p className="text-sm text-muted-foreground mb-2">{item.dimensions}</p>
-                          <p className="text-xl font-bold text-primary">${item.price}</p>
+                          <p className="text-xl font-bold text-primary">
+                            ${item.price}
+                          </p>
                         </div>
 
                         <Button
@@ -129,32 +139,36 @@ const Cart = () => {
             >
               <Card className="sticky top-24 card-elegant border-border/50">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-heading font-bold mb-6">{t('cart.orderSummary')}</h2>
+                  <h2 className="text-xl font-heading font-bold mb-6">
+                    {t("cart.orderSummary")}
+                  </h2>
 
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">{t('cart.itemsCount')} ({cart.length})</span>
+                      <span className="text-muted-foreground">
+                        {t("cart.itemsCount")} ({cart.length})
+                      </span>
                       <span className="font-semibold">${getCartTotal()}</span>
                     </div>
 
                     <Separator />
 
                     <div className="flex justify-between items-center text-lg font-bold">
-                      <span>{t('cart.subtotal')}</span>
+                      <span>{t("cart.subtotal")}</span>
                       <span className="text-primary">${getCartTotal()}</span>
                     </div>
 
-                    <Button 
-                      size="lg" 
+                    <Button
+                      size="lg"
                       className="w-full shadow-elegant"
                       onClick={() => setIsPurchaseDialogOpen(true)}
                     >
-                      {t('cart.checkout')}
+                      {t("cart.checkout")}
                     </Button>
 
                     <Link to="/gallery">
                       <Button variant="outline" size="lg" className="w-full">
-                        {t('cart.continueShopping')}
+                        {t("cart.continueShopping")}
                       </Button>
                     </Link>
                   </div>
@@ -164,12 +178,15 @@ const Cart = () => {
           </div>
         </motion.div>
       </div>
-
+      {/* 💳 Xarid oynasi */}
       <PurchaseDialog
         isOpen={isPurchaseDialogOpen}
         onClose={() => setIsPurchaseDialogOpen(false)}
-        artworkTitle={getPurchaseTitle()}
-        artworkPrice={getCartTotal()}
+        artworks={cart.map((item) => ({
+          id: item.id,
+          title: getTitle(item),
+          price: item.price,
+        }))}
         onConfirm={handlePurchaseConfirm}
       />
     </div>

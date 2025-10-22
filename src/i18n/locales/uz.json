@@ -50,8 +50,11 @@
     "noArtworks": "Ushbu kategoriyada asarlar topilmadi",
     "filter": {
       "all": "Hammasi",
-      "oil": "portret",
-      "watercolor": "Akvarelʹ",
+      "portrait": "Portret",
+      "nature": "Tabiat manzaralari",
+      "abstract": "Abstrakt",
+      "animals": "Hayvonlar",
+      "modern": "Zamonaviy",
       "digital": "Raqamli san'at",
       "mixed": "Aralash texnika"
     }

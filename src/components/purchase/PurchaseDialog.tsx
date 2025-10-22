@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Sparkles } from "lucide-react";
+import { X, Check, Sparkles, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -16,87 +16,77 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { OfertaDialog } from "./OfertaDialog";
 import { toast } from "@/components/ui/use-toast";
 import { useOrder } from "@/hooks/useOrder";
-import { useParams } from "react-router-dom";
 
 interface PurchaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  artworkTitle: string;
-  artworkPrice: number;
+  // 🔹 Detail sahifa uchun
+  artworkId?: string;
+  artworkTitle?: string;
+  artworkPrice?: number;
+  // 🔹 Cart sahifa uchun
+  artworks?: { id: string; title: string; price: number }[];
   onConfirm?: () => void;
 }
 
 export const PurchaseDialog = ({
   isOpen,
   onClose,
+  artworkId,
   artworkTitle,
   artworkPrice,
+  artworks,
   onConfirm,
 }: PurchaseDialogProps) => {
-  const { id } = useParams();
   const { t } = useTranslation();
   const { createOrder } = useOrder();
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [showOferta, setShowOferta] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // 🔍 Form validatsiyasi
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-
-    if (!name.trim()) {
-      newErrors.name = t("purchase.errors.nameRequired");
-    }
-
-    if (!phone.trim()) {
-      newErrors.phone = t("purchase.errors.phoneRequired");
-    } else if (phone.length < 10) {
+    if (!name.trim()) newErrors.name = t("purchase.errors.nameRequired");
+    if (!phone.trim()) newErrors.phone = t("purchase.errors.phoneRequired");
+    else if (phone.length < 10)
       newErrors.phone = t("purchase.errors.phoneInvalid");
-    }
-
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       newErrors.email = t("purchase.errors.emailInvalid");
-    }
-
-    if (!agreedToTerms) {
-      newErrors.terms = t("purchase.errors.termsRequired");
-    }
-
+    if (!agreedToTerms) newErrors.terms = t("purchase.errors.termsRequired");
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
+
+    // 🔹 Agar artworks (cart) bor bo‘lsa — massiv, bo‘lmasa bitta id
+    const items =
+      artworks?.length && artworks.length > 0
+        ? artworks.map((a) => ({ artworkId: a.id, quantity: 1 }))
+        : [{ artworkId: artworkId, quantity: 1 }];
 
     const orderData = {
       fullName: name,
       phoneNumber: phone,
-      address: "null", // bu joyni keyinchalik inputdan olish mumkin
+      address: "null",
       email: email || null,
-      items: [
-        {
-          artworkId: id, // hozircha statik, lekin props orqali ham berish mumkin
-          quantity: 1,
-        },
-      ],
+      items,
     };
 
-    console.log(orderData);
-
     try {
-      // ✅ backendga yuborish
+      setIsLoading(true);
       await createOrder.mutateAsync(orderData);
 
-      // Muvaffaqiyatli holatda animatsiya va toast
       setIsSubmitted(true);
       toast({
         title: t("purchase.success.title"),
@@ -104,8 +94,7 @@ export const PurchaseDialog = ({
         duration: 5000,
       });
 
-      if (onConfirm) onConfirm();
-
+      onConfirm?.();
       setTimeout(() => handleClose(), 2000);
     } catch (error) {
       console.error("Order creation failed:", error);
@@ -113,28 +102,10 @@ export const PurchaseDialog = ({
         title: t("purchase.error.title"),
         description: t("purchase.error.message"),
         variant: "destructive",
-        duration: 4000,
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    // Simulate purchase submission
-    setIsSubmitted(true);
-
-    setTimeout(() => {
-      toast({
-        title: t("purchase.success.title"),
-        description: t("purchase.success.message"),
-        duration: 5000,
-      });
-
-      if (onConfirm) {
-        onConfirm();
-      }
-
-      setTimeout(() => {
-        handleClose();
-      }, 2000);
-    }, 1500);
   };
 
   const handleClose = () => {
@@ -144,8 +115,12 @@ export const PurchaseDialog = ({
     setAgreedToTerms(false);
     setIsSubmitted(false);
     setErrors({});
+    setIsLoading(false);
     onClose();
   };
+
+  const totalPrice =
+    artworks?.reduce((sum, a) => sum + a.price, 0) ?? artworkPrice ?? 0;
 
   return (
     <>
@@ -164,17 +139,34 @@ export const PurchaseDialog = ({
                   <DialogTitle className="text-2xl font-heading text-center">
                     {t("purchase.title")}
                   </DialogTitle>
+
                   <DialogDescription className="text-center text-base mt-2">
-                    <span className="font-semibold text-foreground">
-                      {artworkTitle}
-                    </span>
-                    <span className="block text-2xl font-bold text-primary mt-2">
-                      ${artworkPrice}
-                    </span>
+                    {artworks && artworks.length > 1 ? (
+                      <>
+                        <span className="font-semibold text-foreground">
+                          {t("purchase.multipleItems", {
+                            count: artworks.length,
+                          })}
+                        </span>
+                        <span className="block text-2xl font-bold text-primary mt-2">
+                          {totalPrice.toLocaleString()} so‘m
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="font-semibold text-foreground">
+                          {artworkTitle}
+                        </span>
+                        <span className="block text-2xl font-bold text-primary mt-2">
+                          {artworkPrice?.toLocaleString()} so‘m
+                        </span>
+                      </>
+                    )}
                   </DialogDescription>
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="p-6 space-y-5">
+                  {/* 🔹 Name */}
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-base">
                       {t("purchase.form.name")}{" "}
@@ -192,6 +184,7 @@ export const PurchaseDialog = ({
                     )}
                   </div>
 
+                  {/* 🔹 Phone */}
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-base">
                       {t("purchase.form.phone")}{" "}
@@ -210,6 +203,7 @@ export const PurchaseDialog = ({
                     )}
                   </div>
 
+                  {/* 🔹 Email */}
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-base">
                       {t("purchase.form.email")}{" "}
@@ -230,6 +224,7 @@ export const PurchaseDialog = ({
                     )}
                   </div>
 
+                  {/* 🔹 Terms */}
                   <div className="space-y-3 pt-2">
                     <div className="flex items-start gap-3">
                       <Checkbox
@@ -261,12 +256,20 @@ export const PurchaseDialog = ({
                     )}
                   </div>
 
+                  {/* 🔘 Confirm */}
                   <Button
                     type="submit"
-                    disabled={!agreedToTerms}
-                    className="w-full h-12 text-base rounded-xl font-semibold shadow-elegant hover:shadow-soft hover:scale-[1.02] transition-all duration-300"
+                    disabled={!agreedToTerms || isLoading}
+                    className="w-full h-12 text-base rounded-xl font-semibold shadow-elegant hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    {t("purchase.form.confirm")}
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="animate-spin w-5 h-5" />
+                        {t("loading") || "Yuklanmoqda..."}
+                      </>
+                    ) : (
+                      t("purchase.form.confirm")
+                    )}
                   </Button>
                 </form>
               </motion.div>
@@ -287,26 +290,19 @@ export const PurchaseDialog = ({
                 >
                   <Check className="w-10 h-10 text-primary" strokeWidth={3} />
                 </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <h3 className="text-2xl font-heading font-bold mb-3">
-                    {t("purchase.success.title")}
-                  </h3>
-                  <p className="text-muted-foreground text-lg">
-                    {t("purchase.success.message")}
-                  </p>
-                  <div className="flex items-center justify-center gap-2 mt-4 text-primary">
-                    <Sparkles className="w-5 h-5 animate-pulse" />
-                    <span className="text-sm font-medium">
-                      {t("purchase.success.thankYou")}
-                    </span>
-                    <Sparkles className="w-5 h-5 animate-pulse" />
-                  </div>
-                </motion.div>
+                <h3 className="text-2xl font-heading font-bold mb-3">
+                  {t("purchase.success.title")}
+                </h3>
+                <p className="text-muted-foreground text-lg">
+                  {t("purchase.success.message")}
+                </p>
+                <div className="flex items-center justify-center gap-2 mt-4 text-primary">
+                  <Sparkles className="w-5 h-5 animate-pulse" />
+                  <span className="text-sm font-medium">
+                    {t("purchase.success.thankYou")}
+                  </span>
+                  <Sparkles className="w-5 h-5 animate-pulse" />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

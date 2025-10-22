@@ -3,12 +3,12 @@ import { toast } from "@/hooks/use-toast";
 
 export interface Artwork {
   id: string;
-  title: string;
-  titleRu: string;
-  titleUz: string;
-  description: string;
-  descriptionRu: string;
-  descriptionUz: string;
+  title_uz: string;
+  title_ru: string;
+  title_en: string;
+  description_uz: string;
+  description_ru: string;
+  description_en: string;
   category: string;
   price: number;
   imageUrl: string;
@@ -54,7 +54,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       }
       toast({
         title: "Added to cart",
-        description: `${artwork.title} has been added to your cart`,
+        description: `${artwork.title_en} has been added to your cart`,
       });
       return [...prev, { ...artwork, quantity: 1 }];
     });

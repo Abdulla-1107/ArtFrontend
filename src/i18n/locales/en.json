@@ -50,8 +50,11 @@
     "noArtworks": "No artworks found in this category",
     "filter": {
       "all": "All",
-      "oil": "Portrait",
-      "watercolor": "Watercolor",
+      "portrait": "Portrait",
+      "nature": "Nature",
+      "abstract": "Abstract",
+      "animals": "Animals",
+      "modern": "Modern",
       "digital": "Digital Art",
       "mixed": "Mixed Media"
     }
@@ -74,6 +77,33 @@
     "linkCopied": "Link Copied!",
     "linkCopiedDesc": "Artwork link copied to clipboard"
   },
+  
+  "about": {
+    "title": "About Me",
+    "subtitle": "Art is the language of my soul",
+    "bio": "I am an artist who has been painting for more than 15 years, creating over 50 artworks that reflect emotions and colors of life.",
+    "artworksCreated": "Artworks created",
+    "yearsExperience": "Years of experience",
+    "myJourney": "My Journey",
+    "journeyText1": "My passion for art started at a young age, inspired by nature and people around me.",
+    "journeyText2": "Every artwork I create tells a story — a story of colors, emotions, and beauty."
+  },
+
+  "cart": {
+  "title": "Shopping Cart",
+  "empty": "Your cart is empty",
+  "browseGallery": "Browse the gallery to find artworks for your collection.",
+  "continueShopping": "Continue Shopping",
+  "subtotal": "Subtotal",
+  "checkout": "Proceed to Checkout",
+  "remove": "Remove",
+  "item": "item",
+  "items": "items",
+  "purchaseSuccess": "Purchase completed!",
+  "purchaseSuccessMessage": "Your order has been placed successfully. We'll contact you soon.",
+  "orderSummary": "Order Summary",
+  "itemsCount": "Items"
+},
   "purchase": {
     "title": "Checkout",
     "form": {
@@ -99,5 +129,26 @@
       "message": "Your purchase request has been received. We’ll contact you soon.",
       "thankYou": "Thank you for your interest in art"
     }
-  }
+  },
+  "faq": {
+  "title": "Frequently Asked Questions",
+  "subtitle": "Find answers to the most common questions",
+  "q1": "How can I purchase a painting?",
+  "a1": "Click the 'Buy Now' button on any artwork and fill out the purchase form. We’ll contact you soon to confirm your order.",
+  "q2": "Do you ship internationally?",
+  "a2": "Yes, we provide international shipping. Shipping fees depend on the destination country.",
+  "q3": "Can I commission a custom artwork?",
+  "a3": "Absolutely! You can contact me directly to discuss your idea, size, and style preferences.",
+  "q4": "What payment methods do you accept?",
+  "a4": "We accept online card payments, bank transfers, and local cash payments in Uzbekistan.",
+  "q5": "Are the artworks original?",
+  "a5": "Yes, each piece is 100% original, created by Bibisora herself. Some digital artworks are available as limited edition prints.",
+  "q6": "Can I visit your studio?",
+  "a6": "Yes, visits are available by appointment. Please contact us to schedule your visit.",
+  "q7": "How can I contact you?",
+  "a7": "You can reach us via the contact page or by email at info@bibisora.art.",
+  "stillHaveQuestions": "Still have questions?",
+  "contactUs": "Contact us"
+}
+
 }

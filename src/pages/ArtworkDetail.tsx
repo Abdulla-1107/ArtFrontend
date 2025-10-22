@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { toast } from "@/hooks/use-toast";
@@ -24,7 +23,6 @@ import { API } from "@/hooks/getEnv";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
-
   const { t, i18n } = useTranslation();
 
   const { addToCart, isInCart } = useCart();
@@ -38,37 +36,62 @@ const ArtworkDetail = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["artworks"],
+    queryKey: ["artwork", id, i18n.language],
     queryFn: async () => {
       const res = await axios.get(`${API}/artwork/${id}`);
-
       return res.data.data;
     },
+    staleTime: 1000 * 60,
   });
-  console.log(artwork, "art");
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg text-muted-foreground">{t("artwork.loading")}</p>
+        <p className="text-lg text-muted-foreground animate-pulse">
+          {t("artwork.loading")}
+        </p>
       </div>
     );
   }
 
-  if (isError) {
+  if (isError || !artwork) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-heading font-bold mb-4">
-            {t("artwork.artworkNotFound")}
-          </h1>
-          <Link to="/gallery">
-            <Button variant="outline">{t("artwork.backToGallery")}</Button>
-          </Link>
-        </div>
+      <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
+        <h1 className="text-2xl font-heading font-bold mb-4">
+          {t("artwork.artworkNotFound")}
+        </h1>
+        <Link to="/gallery">
+          <Button variant="outline" className="gap-2">
+            <ArrowLeft className="h-4 w-4" />
+            {t("artwork.backToGallery")}
+          </Button>
+        </Link>
       </div>
     );
   }
+
+  // ✅ Tilga mos title & description olish
+  const getTitle = () => {
+    switch (i18n.language) {
+      case "uz":
+        return artwork.title_uz || artwork.title_en || artwork.title_ru;
+      case "ru":
+        return artwork.title_ru || artwork.title_en || artwork.title_uz;
+      default:
+        return artwork.title_en || artwork.title_uz || artwork.title_ru;
+    }
+  };
+
+  const getDescription = () => {
+    switch (i18n.language) {
+      case "uz":
+        return artwork.description_uz || artwork.description_en || artwork.description_ru;
+      case "ru":
+        return artwork.description_ru || artwork.description_en || artwork.description_uz;
+      default:
+        return artwork.description_en || artwork.description_uz || artwork.description_ru;
+    }
+  };
 
   const inCart = isInCart(artwork.id);
   const isFav = isFavorite(artwork.id);
@@ -84,21 +107,22 @@ const ArtworkDetail = () => {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* 🖼️ Rasm */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
             <Card
-              className="overflow-hidden card-elegant relative group cursor-pointer"
+              className="overflow-hidden relative group cursor-pointer shadow-elegant"
               onClick={() => setLightboxOpen(true)}
             >
               <img
                 src={artwork.imageUrl || "/placeholder.jpg"}
-                alt={artwork.title}
+                alt={getTitle()}
                 className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                 <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-lg font-medium">
                   {t("artwork.clickToViewFull")}
                 </span>
@@ -106,73 +130,56 @@ const ArtworkDetail = () => {
             </Card>
           </motion.div>
 
+          {/* 📄 Ma’lumotlar */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col justify-center"
           >
-            {artwork.category && (
-              <Badge className="w-fit mb-4 bg-secondary text-secondary-foreground">
-                {artwork.category}
-              </Badge>
-            )}
-
             <div className="flex items-start justify-between mb-4">
-              <h1 className="text-4xl md:text-5xl font-heading font-bold">
-                {artwork.title}
+              <h1 className="text-4xl md:text-5xl font-heading font-bold leading-tight">
+                {getTitle()}
               </h1>
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => toggleFavorite(artwork.id, artwork.title)}
+                onClick={() => toggleFavorite(artwork.id, getTitle())}
                 className={cn(isFav && "text-red-500")}
               >
                 <Heart className={cn("h-5 w-5", isFav && "fill-current")} />
               </Button>
             </div>
 
-            {/* 🔸 Description (3 tilda) */}
-            <p className="text-lg text-muted-foreground mb-6">
-              {artwork[`description_${i18n.language}`] ||
-                artwork.description_uz ||
-                ""}
+            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              {getDescription()}
             </p>
 
             <Card className="mb-6 bg-muted/50 border-none">
-              <CardContent className="p-6 space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">
-                    {t("artwork.price")}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">
-                    {t("artwork.dimensions")}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">
-                    {t("artwork.category")}
-                  </span>
-                  <span className="font-medium">
-                    {t(`gallery.filter.${artwork.category}`)}
-                    {artwork.price
-                      ? `${artwork.price.toLocaleString()} so'm`
-                      : t("artwork.free")}
-                  </span>
-                </div>
-                {artwork.category && (
+              <CardContent className="p-6 space-y-4">
+                {artwork.price && (
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">
-                      {t("artwork.category")}
+                      {t("artwork.price")}
                     </span>
-                    <span className="font-medium">{artwork.category}</span>
+                    <span className="font-medium text-lg text-primary">
+                      {artwork.price.toLocaleString()} so‘m
+                    </span>
+                  </div>
+                )}
+
+                {artwork.dimensions && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">
+                      {t("artwork.dimensions")}
+                    </span>
+                    <span className="font-medium">{artwork.dimensions}</span>
                   </div>
                 )}
               </CardContent>
             </Card>
 
+            {/* 🔘 Tugmalar */}
             <div className="flex gap-3">
               <Button
                 onClick={() => addToCart(artwork)}
@@ -206,17 +213,19 @@ const ArtworkDetail = () => {
           </motion.div>
         </div>
 
+        {/* 🔍 Lightbox */}
         <ImageLightbox
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
           image={artwork.imageUrl}
-          title={artwork.title}
+          title={getTitle()}
         />
 
+        {/* 💳 Xarid qilish oynasi */}
         <PurchaseDialog
           isOpen={isPurchaseDialogOpen}
           onClose={() => setIsPurchaseDialogOpen(false)}
-          artworkTitle={artwork.title}
+          artworkTitle={getTitle()}
           artworkPrice={artwork.price}
           onConfirm={() => {
             toast({

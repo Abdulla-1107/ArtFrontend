@@ -19,6 +19,7 @@ import Cart from "./pages/Cart";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import "./i18n/config";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Sonner />
             <LoadingScreen />
             <BrowserRouter>
+              <ScrollToTop />
               <div className="flex flex-col min-h-screen">
                 <Header />
                 <main className="flex-1">

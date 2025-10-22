@@ -5,25 +5,24 @@ import { Button } from "@/components/ui/button";
 import { ArtworkCard } from "@/components/gallery/ArtworkCard";
 import { Testimonials } from "@/components/home/Testimonials";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
-import { API } from "@/hooks/getEnv";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { API } from "@/hooks/getEnv";
 
 const Home = () => {
   const { t } = useTranslation();
 
-  const { data: artWorkList } = useQuery({
-    queryKey: ["artworks"],
+  const { data: artWorkList, isLoading } = useQuery({
+    queryKey: ["artwork"],
     queryFn: async () => {
       const res = await axios.get(`${API}/artwork?page=1&limit=3`);
-      console.log(res, "res");
       return res.data?.data;
     },
   });
 
   return (
     <div className="min-h-screen">
+      {/* --- HERO SECTION --- */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-hero">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80')] bg-cover bg-center opacity-5 animate-parallax" />
 
@@ -85,10 +84,10 @@ const Home = () => {
             </motion.div>
           </motion.div>
         </div>
-
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </section>
 
+      {/* --- FEATURED SECTION --- */}
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <motion.div
@@ -104,11 +103,26 @@ const Home = () => {
             <div className="section-divider" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
-            {artWorkList?.map((artwork: any, index: any) => (
-              <ArtworkCard key={artwork.id} artwork={artwork} index={index} />
-            ))}
-          </div>
+          {/* --- LOADING STATE --- */}
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
+              {[1, 2, 3].map((i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: i * 0.2 }}
+                  className="bg-muted/30 rounded-2xl h-[350px] animate-pulse"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
+              {artWorkList?.map((artwork: any, index: number) => (
+                <ArtworkCard key={artwork.id} artwork={artwork} index={index} />
+              ))}
+            </div>
+          )}
 
           <motion.div
             initial={{ opacity: 0 }}

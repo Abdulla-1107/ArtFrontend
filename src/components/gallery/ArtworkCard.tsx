@@ -23,11 +23,11 @@ export const ArtworkCard = ({ artwork, index = 0 }: ArtworkCardProps) => {
   const getTitle = () => {
     switch (i18n.language) {
       case "ru":
-        return artwork.titleRu;
+        return artwork.title_ru;
       case "uz":
-        return artwork.titleUz;
+        return artwork.title_uz;
       default:
-        return artwork.title;
+        return artwork.title_en;
     }
   };
 
