@@ -85,11 +85,23 @@ const ArtworkDetail = () => {
   const getDescription = () => {
     switch (i18n.language) {
       case "uz":
-        return artwork.description_uz || artwork.description_en || artwork.description_ru;
+        return (
+          artwork.description_uz ||
+          artwork.description_en ||
+          artwork.description_ru
+        );
       case "ru":
-        return artwork.description_ru || artwork.description_en || artwork.description_uz;
+        return (
+          artwork.description_ru ||
+          artwork.description_en ||
+          artwork.description_uz
+        );
       default:
-        return artwork.description_en || artwork.description_uz || artwork.description_ru;
+        return (
+          artwork.description_en ||
+          artwork.description_uz ||
+          artwork.description_ru
+        );
     }
   };
 
@@ -225,15 +237,9 @@ const ArtworkDetail = () => {
         <PurchaseDialog
           isOpen={isPurchaseDialogOpen}
           onClose={() => setIsPurchaseDialogOpen(false)}
+          artworkId={artwork.id} // 🟢 kerakli joy
           artworkTitle={getTitle()}
           artworkPrice={artwork.price}
-          onConfirm={() => {
-            toast({
-              title: t("purchase.success.title"),
-              description: t("purchase.success.message"),
-              duration: 5000,
-            });
-          }}
         />
       </div>
     </div>
